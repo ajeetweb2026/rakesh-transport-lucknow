@@ -56,6 +56,26 @@
 
 <style>
 
+:root{
+    --blue:#2563eb;
+    --blue-dark:#1d4ed8;
+    --blue-light:#60a5fa;
+
+    --yellow:#ffb703;
+    --green:#20c76a;
+
+    --dark:#071426;
+    --text:#172033;
+    --muted:#64748b;
+
+    --glass:rgba(255,255,255,.58);
+    --glass-light:rgba(255,255,255,.68);
+
+    --border:rgba(255,255,255,.62);
+
+    --shadow:0 22px 65px rgba(15,23,42,.12);
+}
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -68,13 +88,92 @@ html{
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f4f7fb;
-    color:#172033;
+    color:var(--text);
     line-height:1.6;
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(248,251,255,.90),
+            rgba(239,246,255,.76),
+            rgba(248,250,252,.90)
+        ),
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=80"),
+        url("https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=80"),
+        url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=80");
+
+    background-repeat:no-repeat;
+
+    background-position:
+        center,
+        88% 18%,
+        10% 70%,
+        8% 10%;
+
+    background-size:
+        cover,
+        520px auto,
+        520px auto,
+        420px auto;
+
+    background-attachment:fixed;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            rgba(37,99,235,.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 18%,
+            rgba(14,165,233,.10),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(37,99,235,.08),
+            transparent 28%
+        );
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            rgba(37,99,235,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(37,99,235,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:42px 42px;
 }
 
 a{
     text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
 }
 
 .container{
@@ -83,118 +182,232 @@ a{
     margin:auto;
 }
 
-/* HEADER */
+/* =========================
+   GLASS
+========================= */
+
+.glass{
+    background:var(--glass);
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-    background:#071426;
-    color:white;
     position:sticky;
     top:0;
     z-index:1000;
-    box-shadow:0 3px 15px rgba(0,0,0,.2);
+
+    background:rgba(7,20,38,.72);
+
+    border-bottom:1px solid rgba(255,255,255,.10);
+
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
 }
 
 .nav{
     max-width:1150px;
     width:92%;
     margin:auto;
+
     min-height:70px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:15px;
 }
 
 .logo{
     font-size:21px;
     font-weight:800;
+    color:#fff;
 }
 
 .logo span{
-    color:#ffb703;
+    color:var(--yellow);
 }
 
 .nav-btn{
-    background:#ffb703;
+    background:var(--yellow);
     color:#111;
+
     padding:11px 18px;
+
     border-radius:25px;
+
     font-weight:800;
+
+    box-shadow:0 8px 20px rgba(255,183,3,.18);
+
+    transition:.2s ease;
 }
 
-/* HERO */
+.nav-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-    background:
-    linear-gradient(135deg,rgba(4,16,32,.96),rgba(10,39,68,.88)),
-    url("super-carry.jpeg") center/cover;
+    position:relative;
+
+    padding:75px 0 95px;
+
     color:white;
-    padding:65px 0 80px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(4,16,32,.92),
+            rgba(10,39,68,.82)
+        ),
+        url("super-carry.jpeg") center/cover;
+
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    right:-110px;
+    top:-120px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(96,165,250,.22),
+            transparent 68%
+        );
 }
 
 .hero-grid{
+    position:relative;
+    z-index:2;
+
     display:grid;
+
     grid-template-columns:1.1fr .9fr;
+
     gap:40px;
+
     align-items:center;
 }
 
 .badge{
     display:inline-block;
-    background:rgba(255,183,3,.15);
-    border:1px solid #ffb703;
+
+    background:rgba(255,183,3,.12);
+
+    border:1px solid rgba(255,183,3,.72);
+
     color:#ffd166;
+
     padding:7px 14px;
+
     border-radius:30px;
+
     font-size:14px;
+
     font-weight:bold;
+
     margin-bottom:18px;
+
+    backdrop-filter:blur(12px);
 }
 
 .hero h1{
     font-size:48px;
+
     line-height:1.12;
+
     margin-bottom:18px;
+
+    letter-spacing:-1.5px;
 }
 
 .hero h1 span{
-    color:#ffb703;
+    color:var(--yellow);
 }
 
 .hero p{
     color:#dce7f4;
+
     font-size:18px;
+
     margin-bottom:25px;
+
+    max-width:650px;
 }
 
 .hero-highlight{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
+
     margin:0 0 25px;
 }
 
 .hero-highlight div{
     background:rgba(255,255,255,.09);
-    border:1px solid rgba(255,255,255,.15);
+
+    border:1px solid rgba(255,255,255,.14);
+
     padding:8px 12px;
-    border-radius:8px;
+
+    border-radius:10px;
+
     font-size:14px;
+
     font-weight:bold;
+
+    backdrop-filter:blur(10px);
 }
 
 .hero-buttons{
     display:flex;
+
     gap:12px;
+
     flex-wrap:wrap;
 }
 
 .btn{
-    display:inline-block;
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
     padding:14px 22px;
-    border-radius:10px;
+
+    border-radius:11px;
+
     font-weight:800;
-    transition:.2s;
+
+    transition:.2s ease;
 }
 
 .btn:hover{
@@ -202,57 +415,95 @@ header{
 }
 
 .call{
-    background:#ffb703;
+    background:var(--yellow);
     color:#111;
+
+    box-shadow:0 12px 26px rgba(255,183,3,.18);
 }
 
 .whatsapp{
-    background:#20c76a;
+    background:var(--green);
     color:white;
+
+    box-shadow:0 12px 26px rgba(32,199,106,.18);
 }
 
+/* =========================
+   HERO IMAGE CARD
+========================= */
+
 .hero-card{
-    background:white;
     padding:10px;
-    border-radius:20px;
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.18);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.28);
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
 }
 
 .hero-card img{
     width:100%;
+
     height:330px;
+
     object-fit:cover;
-    border-radius:15px;
+
+    border-radius:16px;
 }
 
 .vehicle-tag{
-    color:#111;
-    padding:12px 8px 5px;
+    color:#fff;
+
+    padding:13px 8px 6px;
+
     text-align:center;
+
     font-weight:800;
 }
 
-/* TRUST */
+/* =========================
+   TRUST
+========================= */
 
 .trust{
-    margin-top:-30px;
+    margin-top:-32px;
+
     position:relative;
+
     z-index:5;
 }
 
 .trust-grid{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
-    background:white;
-    border-radius:16px;
-    box-shadow:0 10px 35px rgba(0,0,0,.1);
+
     overflow:hidden;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.64);
+
+    border:1px solid rgba(255,255,255,.72);
+
+    box-shadow:0 18px 45px rgba(15,23,42,.12);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 }
 
 .trust-item{
-    padding:20px;
+    padding:22px;
+
     text-align:center;
-    border-right:1px solid #eee;
+
+    border-right:1px solid rgba(148,163,184,.15);
 }
 
 .trust-item:last-child{
@@ -261,89 +512,172 @@ header{
 
 .trust-item strong{
     display:block;
+
     font-size:18px;
 }
 
-/* SECTIONS */
+/* =========================
+   GENERAL SECTIONS
+========================= */
 
 section{
-    padding:70px 0;
+    padding:75px 0;
 }
 
 .section-title{
     text-align:center;
+
     margin-bottom:40px;
 }
 
 .section-title h2{
-    font-size:34px;
+    font-size:35px;
+
     margin-bottom:8px;
+
+    letter-spacing:-.5px;
 }
 
 .section-title p{
-    color:#64748b;
+    color:var(--muted);
 }
 
-/* ABOUT */
+/* =========================
+   ABOUT
+========================= */
 
 .about-grid{
     display:grid;
+
     grid-template-columns:.85fr 1.15fr;
+
     gap:35px;
+
     align-items:center;
 }
 
 .about-img{
     width:100%;
+
     height:390px;
+
     object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 12px 35px rgba(0,0,0,.15);
+
+    border-radius:22px;
+
+    box-shadow:0 18px 45px rgba(15,23,42,.14);
+
+    border:1px solid rgba(255,255,255,.55);
+}
+
+.about-text{
+    padding:8px;
 }
 
 .about-text h2{
     font-size:34px;
+
     margin-bottom:15px;
 }
 
 .about-text p{
     color:#526174;
+
     margin-bottom:15px;
 }
 
 .owner-box{
-    background:white;
+    background:rgba(255,255,255,.62);
+
     padding:20px;
-    border-radius:15px;
+
+    border-radius:17px;
+
     margin-top:20px;
-    border-left:5px solid #ffb703;
-    box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+    border-left:5px solid var(--yellow);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.07);
+
+    backdrop-filter:blur(14px);
 }
 
-/* VEHICLE */
+/* =========================
+   VEHICLE
+========================= */
 
 .vehicle-section{
-    background:#071426;
+    position:relative;
+
     color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,20,38,.93),
+            rgba(18,54,90,.90)
+        ),
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1700&q=80")
+        center/cover;
+
+    overflow:hidden;
+}
+
+.vehicle-section::before{
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    left:-110px;
+    bottom:-130px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(96,165,250,.20),
+            transparent 68%
+        );
 }
 
 .vehicle-grid{
+    position:relative;
+    z-index:2;
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:35px;
+
     align-items:center;
 }
 
 .vehicle-img{
     width:100%;
+
     height:390px;
+
     object-fit:cover;
-    border-radius:20px;
-    border:5px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    border:5px solid rgba(255,255,255,.09);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.vehicle-info{
+    padding:10px;
 }
 
 .vehicle-info h2{
     font-size:38px;
+
     margin-bottom:15px;
 }
 
@@ -353,181 +687,292 @@ section{
 
 .specs{
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:12px;
+
     margin:25px 0;
 }
 
 .spec{
-    background:#10233d;
+    background:rgba(255,255,255,.07);
+
+    border:1px solid rgba(255,255,255,.08);
+
     padding:17px;
-    border-radius:12px;
+
+    border-radius:13px;
+
+    backdrop-filter:blur(10px);
 }
 
 .spec small{
     color:#94a3b8;
+
     display:block;
 }
 
 .spec strong{
     color:white;
+
     font-size:18px;
 }
 
-/* VIDEO */
+/* =========================
+   VIDEO
+========================= */
 
 .video-box{
     max-width:850px;
+
     margin:auto;
-    background:#071426;
+
+    background:rgba(255,255,255,.55);
+
     padding:10px;
-    border-radius:20px;
-    box-shadow:0 10px 35px rgba(0,0,0,.12);
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.65);
+
+    box-shadow:0 20px 50px rgba(15,23,42,.13);
+
+    backdrop-filter:blur(15px);
 }
 
 .video-box video{
     width:100%;
+
     display:block;
-    border-radius:14px;
+
+    border-radius:15px;
 }
 
-/* PRICING */
+/* =========================
+   PRICING
+========================= */
 
 .price-section{
-    background:#f8fafc;
+    background:rgba(248,250,252,.52);
 }
 
 .price-grid{
     display:grid;
+
     grid-template-columns:repeat(5,1fr);
+
     gap:15px;
 }
 
 .price-card{
-    background:white;
+    background:rgba(255,255,255,.62);
+
     padding:22px 12px;
-    border-radius:15px;
+
+    border-radius:17px;
+
     text-align:center;
-    box-shadow:0 7px 25px rgba(0,0,0,.07);
-    border:1px solid #e8edf3;
+
+    box-shadow:0 10px 28px rgba(0,0,0,.06);
+
+    border:1px solid rgba(255,255,255,.66);
+
+    backdrop-filter:blur(15px);
 }
 
 .price-card:first-child{
-    border:2px solid #ffb703;
+    border:2px solid rgba(255,183,3,.75);
 }
 
 .price-card .distance{
     font-weight:bold;
+
     color:#64748b;
+
     font-size:14px;
 }
 
 .price{
     font-size:24px;
+
     font-weight:900;
+
     color:#071426;
+
     margin-top:8px;
 }
 
 .note{
     text-align:center;
+
     margin-top:22px;
+
     color:#64748b;
 }
 
-/* ROUTES */
+/* =========================
+   ROUTES
+========================= */
 
 .routes{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:15px;
 }
 
 .route{
-    background:white;
+    background:rgba(255,255,255,.62);
+
     padding:20px;
-    border-radius:13px;
-    box-shadow:0 6px 20px rgba(0,0,0,.06);
+
+    border-radius:15px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+
+    border:1px solid rgba(255,255,255,.65);
+
     font-weight:700;
+
+    backdrop-filter:blur(15px);
 }
 
 .route span{
     color:#ff9800;
 }
 
-/* WHY */
+/* =========================
+   WHY
+========================= */
 
 .why{
-    background:#eef4fa;
+    background:rgba(238,244,250,.55);
 }
 
 .why-grid{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:20px;
 }
 
 .why-card{
-    background:white;
+    background:rgba(255,255,255,.60);
+
     padding:25px;
-    border-radius:16px;
-    box-shadow:0 7px 25px rgba(0,0,0,.06);
+
+    border-radius:18px;
+
+    box-shadow:0 9px 25px rgba(0,0,0,.06);
+
+    border:1px solid rgba(255,255,255,.64);
+
+    backdrop-filter:blur(15px);
+
+    transition:.25s ease;
+}
+
+.why-card:hover{
+    transform:translateY(-5px);
 }
 
 .icon{
     font-size:30px;
+
     margin-bottom:10px;
 }
 
-/* BOOKING */
+/* =========================
+   BOOKING
+========================= */
 
 .booking{
-    background:linear-gradient(135deg,#071426,#12365a);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,20,38,.93),
+            rgba(18,54,90,.88)
+        ),
+        url("https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1700&q=80")
+        center/cover;
+
     color:white;
 }
 
 .booking-box{
     max-width:700px;
+
     margin:auto;
-    background:white;
+
+    background:rgba(255,255,255,.78);
+
     color:#172033;
+
     padding:30px;
-    border-radius:20px;
-    box-shadow:0 15px 45px rgba(0,0,0,.25);
+
+    border-radius:23px;
+
+    border:1px solid rgba(255,255,255,.7);
+
+    box-shadow:0 20px 55px rgba(0,0,0,.22);
+
+    backdrop-filter:blur(20px);
 }
 
 .booking-box h2{
     text-align:center;
+
     margin-bottom:8px;
 }
 
 .booking-box .sub{
     text-align:center;
+
     color:#64748b;
+
     margin-bottom:25px;
 }
 
 .form-grid{
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:14px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
     width:100%;
+
     padding:14px;
+
     border:1px solid #dbe2ea;
-    border-radius:9px;
+
+    border-radius:10px;
+
     font-size:15px;
+
     outline:none;
+
+    background:rgba(255,255,255,.82);
 }
 
-input:focus,select:focus,textarea:focus{
-    border-color:#ffb703;
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--yellow);
+
+    box-shadow:0 0 0 3px rgba(255,183,3,.10);
 }
 
 textarea{
     min-height:100px;
+
     resize:vertical;
 }
 
@@ -537,37 +982,61 @@ textarea{
 
 .book-btn{
     width:100%;
+
     border:0;
+
     padding:16px;
-    border-radius:10px;
-    background:#20c76a;
+
+    border-radius:11px;
+
+    background:var(--green);
+
     color:white;
+
     font-size:17px;
+
     font-weight:900;
+
     cursor:pointer;
+
+    transition:.2s ease;
 }
 
-/* FAQ */
+.book-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   FAQ
+========================= */
 
 .faq-section{
-    background:white;
+    background:rgba(255,255,255,.52);
 }
 
 .faq{
     max-width:850px;
+
     margin:auto;
 }
 
 .faq-item{
-    background:#f8fafc;
-    border:1px solid #e5eaf0;
-    border-radius:12px;
+    background:rgba(248,250,252,.62);
+
+    border:1px solid rgba(255,255,255,.72);
+
+    border-radius:15px;
+
     margin-bottom:12px;
+
     padding:18px 20px;
+
+    backdrop-filter:blur(14px);
 }
 
 .faq-item h3{
     font-size:18px;
+
     margin-bottom:7px;
 }
 
@@ -575,7 +1044,9 @@ textarea{
     color:#64748b;
 }
 
-/* CONTACT */
+/* =========================
+   CONTACT
+========================= */
 
 .contact{
     text-align:center;
@@ -583,18 +1054,27 @@ textarea{
 
 .phone{
     font-size:32px;
+
     font-weight:900;
+
     color:#071426;
+
     display:block;
+
     margin:12px 0 22px;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     background:#050d18;
+
     color:#aeb9c7;
+
     text-align:center;
+
     padding:30px 15px 85px;
 }
 
@@ -602,27 +1082,44 @@ footer strong{
     color:white;
 }
 
-/* MOBILE BAR */
+/* =========================
+   MOBILE BAR
+========================= */
 
 .mobile-bar{
     position:fixed;
+
     bottom:0;
+
     left:0;
     right:0;
-    background:white;
+
+    background:rgba(255,255,255,.94);
+
     padding:9px;
+
     display:flex;
+
     gap:8px;
+
     z-index:2000;
-    box-shadow:0 -4px 20px rgba(0,0,0,.15);
+
+    box-shadow:0 -5px 22px rgba(0,0,0,.16);
+
+    backdrop-filter:blur(14px);
 }
 
 .mobile-bar a{
     flex:1;
+
     text-align:center;
+
     padding:13px 5px;
-    border-radius:8px;
+
+    border-radius:9px;
+
     color:white;
+
     font-weight:900;
 }
 
@@ -634,7 +1131,9 @@ footer strong{
     background:#20c76a;
 }
 
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:850px){
 
@@ -654,6 +1153,7 @@ footer strong{
 
     .hero-card{
         max-width:550px;
+
         margin:auto;
     }
 
@@ -663,7 +1163,12 @@ footer strong{
 
     .trust-item{
         border-right:none;
-        border-bottom:1px solid #eee;
+
+        border-bottom:1px solid rgba(148,163,184,.14);
+    }
+
+    .trust-item:last-child{
+        border-bottom:none;
     }
 
     .price-grid{
@@ -674,6 +1179,7 @@ footer strong{
     .why-grid{
         grid-template-columns:1fr 1fr;
     }
+
 }
 
 @media(max-width:550px){
@@ -684,6 +1190,7 @@ footer strong{
 
     .nav-btn{
         font-size:13px;
+
         padding:8px 12px;
     }
 
@@ -738,6 +1245,16 @@ footer strong{
     .phone{
         font-size:26px;
     }
+
+    body{
+        background-attachment:scroll;
+
+        background-size:
+            cover,
+            360px auto,
+            360px auto,
+            280px auto;
+    }
 }
 
 </style>
@@ -789,6 +1306,9 @@ Book Vehicle
 
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
 
 <div class="container hero-grid">
@@ -812,7 +1332,9 @@ Fast Freight Booking • Reliable Service
 <div class="hero-highlight">
 
 <div>🚚 900–1000 Kg</div>
+
 <div>📍 Lucknow</div>
+
 <div>📞 Direct Booking</div>
 
 </div>
@@ -825,13 +1347,15 @@ Fast Freight Booking • Reliable Service
 
 <a class="btn whatsapp"
 href="https://wa.me/919670463908?text=Hello%20Rakesh%20Kumar%2C%20mujhe%20Super%20Carry%20booking%20chahiye."
-target="_blank">
+target="_blank"
+rel="noopener">
 💬 WhatsApp Booking
 </a>
 
 </div>
 
 </div>
+
 
 <div class="hero-card">
 
@@ -850,6 +1374,9 @@ loading="eager">
 
 </section>
 
+
+<!-- TRUST -->
+
 <div class="trust">
 
 <div class="container">
@@ -857,25 +1384,43 @@ loading="eager">
 <div class="trust-grid">
 
 <div class="trust-item">
-<strong>🚚 900–1000 Kg</strong>
+
+<strong>
+🚚 900–1000 Kg
+</strong>
+
 Vehicle Capacity
+
 </div>
 
 <div class="trust-item">
-<strong>📍 Lucknow</strong>
+
+<strong>
+📍 Lucknow
+</strong>
+
 Local & Outstation
+
 </div>
 
 <div class="trust-item">
-<strong>📞 Direct Booking</strong>
+
+<strong>
+📞 Direct Booking
+</strong>
+
 Call / WhatsApp
-</div>
 
 </div>
 
 </div>
 
 </div>
+
+</div>
+
+
+<!-- ABOUT -->
 
 <section>
 
@@ -890,6 +1435,7 @@ alt="Rakesh Kumar Transport Owner in Lucknow"
 loading="lazy">
 
 </div>
+
 
 <div class="about-text">
 
@@ -936,6 +1482,9 @@ Local & Outstation Goods Transport Service
 
 </section>
 
+
+<!-- VEHICLE -->
+
 <section class="vehicle-section">
 
 <div class="container vehicle-grid">
@@ -949,6 +1498,7 @@ alt="Super Carry freight vehicle available for booking in Lucknow"
 loading="lazy">
 
 </div>
+
 
 <div class="vehicle-info">
 
@@ -991,7 +1541,8 @@ Super Carry available hai.
 
 <a class="btn whatsapp"
 href="https://wa.me/919670463908?text=Hello%20Rakesh%20Kumar%2C%20Super%20Carry%20booking%20ke%20liye%20details%20chahiye."
-target="_blank">
+target="_blank"
+rel="noopener">
 💬 Check Vehicle Availability
 </a>
 
@@ -1001,13 +1552,18 @@ target="_blank">
 
 </section>
 
+
+<!-- VIDEO -->
+
 <section>
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>🎥 Super Carry Vehicle Video</h2>
+<h2>
+🎥 Super Carry Vehicle Video
+</h2>
 
 <p>
 See the vehicle available for goods transport
@@ -1017,9 +1573,13 @@ See the vehicle available for goods transport
 
 <div class="video-box">
 
-<video controls preload="metadata">
+<video
+controls
+preload="metadata">
 
-<source src="super-carry-video.mp4" type="video/mp4">
+<source
+src="super-carry-video.mp4"
+type="video/mp4">
 
 Your browser does not support the video tag.
 
@@ -1035,13 +1595,18 @@ Super Carry • 900–1000 Kg • Lucknow
 
 </section>
 
+
+<!-- PRICING -->
+
 <section class="price-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>💰 Super Carry Freight Rates</h2>
+<h2>
+💰 Super Carry Freight Rates
+</h2>
 
 <p>
 Starting freight rates for local booking
@@ -1049,34 +1614,75 @@ Starting freight rates for local booking
 
 </div>
 
+
 <div class="price-grid">
 
 <div class="price-card">
-<div class="distance">0.5 KM</div>
-<div class="price">₹790/-</div>
+
+<div class="distance">
+0.5 KM
 </div>
+
+<div class="price">
+₹790/-
+</div>
+
+</div>
+
 
 <div class="price-card">
-<div class="distance">5 – 10 KM</div>
-<div class="price">₹1,350/-</div>
+
+<div class="distance">
+5 – 10 KM
 </div>
+
+<div class="price">
+₹1,350/-
+</div>
+
+</div>
+
 
 <div class="price-card">
-<div class="distance">10 – 15 KM</div>
-<div class="price">₹2,150/-</div>
+
+<div class="distance">
+10 – 15 KM
 </div>
+
+<div class="price">
+₹2,150/-
+</div>
+
+</div>
+
 
 <div class="price-card">
-<div class="distance">15 – 20 KM</div>
-<div class="price">₹2,640/-</div>
+
+<div class="distance">
+15 – 20 KM
 </div>
+
+<div class="price">
+₹2,640/-
+</div>
+
+</div>
+
 
 <div class="price-card">
-<div class="distance">20 – 25 KM</div>
-<div class="price">₹2,900/-</div>
+
+<div class="distance">
+20 – 25 KM
+</div>
+
+<div class="price">
+₹2,900/-
 </div>
 
 </div>
+
+</div>
+
 
 <p class="note">
 ✅ Final fare route, distance, loading and unloading requirements ke according confirm hoga.
@@ -1086,19 +1692,25 @@ Starting freight rates for local booking
 
 </section>
 
+
+<!-- ROUTES -->
+
 <section>
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>🛣️ Popular Transport Routes</h2>
+<h2>
+🛣️ Popular Transport Routes
+</h2>
 
 <p>
 Lucknow se local aur outstation freight booking
 </p>
 
 </div>
+
 
 <div class="routes">
 
@@ -1132,13 +1744,18 @@ Lucknow se local aur outstation freight booking
 
 </section>
 
+
+<!-- WHY -->
+
 <section class="why">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>⭐ Why Book With Rakesh Kumar Transport?</h2>
+<h2>
+⭐ Why Book With Rakesh Kumar Transport?
+</h2>
 
 <p>
 Simple, direct aur convenient freight booking
@@ -1146,13 +1763,18 @@ Simple, direct aur convenient freight booking
 
 </div>
 
+
 <div class="why-grid">
 
 <div class="why-card">
 
-<div class="icon">🚚</div>
+<div class="icon">
+🚚
+</div>
 
-<h3>Super Carry Available</h3>
+<h3>
+Super Carry Available
+</h3>
 
 <p>
 900–1000 Kg capacity Super Carry goods transport ke liye available.
@@ -1160,11 +1782,16 @@ Simple, direct aur convenient freight booking
 
 </div>
 
+
 <div class="why-card">
 
-<div class="icon">📱</div>
+<div class="icon">
+📱
+</div>
 
-<h3>Direct Booking</h3>
+<h3>
+Direct Booking
+</h3>
 
 <p>
 Broker ke bina direct Call ya WhatsApp par booking request bhejein.
@@ -1172,11 +1799,16 @@ Broker ke bina direct Call ya WhatsApp par booking request bhejein.
 
 </div>
 
+
 <div class="why-card">
 
-<div class="icon">📍</div>
+<div class="icon">
+📍
+</div>
 
-<h3>Local & Outstation</h3>
+<h3>
+Local & Outstation
+</h3>
 
 <p>
 Lucknow aur selected nearby routes ke liye freight booking available.
@@ -1190,13 +1822,18 @@ Lucknow aur selected nearby routes ke liye freight booking available.
 
 </section>
 
+
+<!-- BOOKING -->
+
 <section class="booking" id="booking">
 
 <div class="container">
 
 <div class="booking-box">
 
-<h2>📋 Quick Freight Booking</h2>
+<h2>
+📋 Quick Freight Booking
+</h2>
 
 <p class="sub">
 Details fill karein aur booking request direct WhatsApp par bhejein.
@@ -1206,24 +1843,54 @@ Details fill karein aur booking request direct WhatsApp par bhejein.
 
 <div class="form-grid">
 
-<input type="text" id="name" placeholder="Your Name" required>
+<input
+type="text"
+id="name"
+placeholder="Your Name"
+required>
 
-<input type="tel" id="phone" placeholder="Mobile Number" required>
+<input
+type="tel"
+id="phone"
+placeholder="Mobile Number"
+required>
 
-<input type="text" id="pickup" placeholder="Pickup Location" required>
+<input
+type="text"
+id="pickup"
+placeholder="Pickup Location"
+required>
 
-<input type="text" id="drop" placeholder="Drop Location" required>
+<input
+type="text"
+id="drop"
+placeholder="Drop Location"
+required>
 
-<select id="load" class="full" required>
+<select
+id="load"
+class="full"
+required>
 
 <option value="">
 Select Approx Load
 </option>
 
-<option>Up to 500 Kg</option>
-<option>500–700 Kg</option>
-<option>700–900 Kg</option>
-<option>900–1000 Kg</option>
+<option>
+Up to 500 Kg
+</option>
+
+<option>
+500–700 Kg
+</option>
+
+<option>
+700–900 Kg
+</option>
+
+<option>
+900–1000 Kg
+</option>
 
 </select>
 
@@ -1237,7 +1904,9 @@ placeholder="Goods / loading details"></textarea>
 <button
 type="submit"
 class="book-btn">
+
 💬 Send Booking Request on WhatsApp
+
 </button>
 
 </div>
@@ -1252,13 +1921,18 @@ class="book-btn">
 
 </section>
 
+
+<!-- FAQ -->
+
 <section class="faq-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>❓ Frequently Asked Questions</h2>
+<h2>
+❓ Frequently Asked Questions
+</h2>
 
 <p>
 Super Carry booking ke baare mein
@@ -1266,11 +1940,14 @@ Super Carry booking ke baare mein
 
 </div>
 
+
 <div class="faq">
 
 <div class="faq-item">
 
-<h3>🚚 Super Carry ki load capacity kitni hai?</h3>
+<h3>
+🚚 Super Carry ki load capacity kitni hai?
+</h3>
 
 <p>
 Vehicle ki listed capacity approximately 900–1000 Kg hai.
@@ -1279,9 +1956,12 @@ Final loading requirements booking ke time confirm ki jayengi.
 
 </div>
 
+
 <div class="faq-item">
 
-<h3>📍 Kya Lucknow se outstation booking available hai?</h3>
+<h3>
+📍 Kya Lucknow se outstation booking available hai?
+</h3>
 
 <p>
 Haan, Lucknow se Kanpur, Unnao, Barabanki, Ayodhya,
@@ -1290,9 +1970,12 @@ Prayagraj aur nearby areas ke liye booking request bheji ja sakti hai.
 
 </div>
 
+
 <div class="faq-item">
 
-<h3>📱 Booking kaise karein?</h3>
+<h3>
+📱 Booking kaise karein?
+</h3>
 
 <p>
 Pickup, drop aur load details form mein bharein ya directly
@@ -1301,9 +1984,12 @@ Rakesh Kumar ko Call/WhatsApp karein.
 
 </div>
 
+
 <div class="faq-item">
 
-<h3>💰 Final freight fare kaise confirm hoga?</h3>
+<h3>
+💰 Final freight fare kaise confirm hoga?
+</h3>
 
 <p>
 Final fare route, distance, loading aur unloading requirements
@@ -1318,13 +2004,18 @@ ke according booking ke time confirm hoga.
 
 </section>
 
+
+<!-- CONTACT -->
+
 <section class="contact">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>📞 Need a Vehicle in Lucknow?</h2>
+<h2>
+📞 Need a Vehicle in Lucknow?
+</h2>
 
 <p>
 Call or WhatsApp Rakesh Kumar directly for booking
@@ -1332,9 +2023,11 @@ Call or WhatsApp Rakesh Kumar directly for booking
 
 </div>
 
+
 <a class="phone" href="tel:9670463908">
 9670463908
 </a>
+
 
 <div class="hero-buttons" style="justify-content:center;">
 
@@ -1344,7 +2037,8 @@ Call or WhatsApp Rakesh Kumar directly for booking
 
 <a class="btn whatsapp"
 href="https://wa.me/919670463908?text=Hello%20Rakesh%20Kumar%2C%20mujhe%20freight%20booking%20chahiye."
-target="_blank">
+target="_blank"
+rel="noopener">
 💬 WhatsApp Now
 </a>
 
@@ -1354,9 +2048,14 @@ target="_blank">
 
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
 
-<strong>🚚 Rakesh Kumar Transport</strong>
+<strong>
+🚚 Rakesh Kumar Transport
+</strong>
 
 <br>
 
@@ -1376,46 +2075,90 @@ Super Carry • 900–1000 Kg • Freight Booking
 
 </footer>
 
+
+<!-- MOBILE BAR -->
+
 <div class="mobile-bar">
 
-<a class="mobile-call" href="tel:9670463908">
+<a
+class="mobile-call"
+href="tel:9670463908">
+
 📞 Call
+
 </a>
 
-<a class="mobile-wa"
+<a
+class="mobile-wa"
 href="https://wa.me/919670463908?text=Hello%20Rakesh%20Kumar%2C%20mujhe%20Super%20Carry%20booking%20chahiye."
-target="_blank">
+target="_blank"
+rel="noopener">
+
 💬 WhatsApp Booking
+
 </a>
 
 </div>
 
+
 <script>
 
-document.getElementById("bookingForm").addEventListener("submit",function(e){
+document
+.getElementById("bookingForm")
+.addEventListener("submit",function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
-var load=document.getElementById("load").value;
-var message=document.getElementById("message").value;
+    var name =
+        document.getElementById("name").value.trim();
 
-var text =
-"🚚 *Super Carry Freight Booking Request*%0A%0A" +
-"👤 Name: " + encodeURIComponent(name) + "%0A" +
-"📞 Mobile: " + encodeURIComponent(phone) + "%0A" +
-"📍 Pickup: " + encodeURIComponent(pickup) + "%0A" +
-"📍 Drop: " + encodeURIComponent(drop) + "%0A" +
-"📦 Load: " + encodeURIComponent(load) + "%0A" +
-"📝 Goods Details: " + encodeURIComponent(message);
+    var phone =
+        document.getElementById("phone").value.trim();
 
-window.open(
-"https://wa.me/919670463908?text=" + text,
-"_blank"
-);
+    var pickup =
+        document.getElementById("pickup").value.trim();
+
+    var drop =
+        document.getElementById("drop").value.trim();
+
+    var load =
+        document.getElementById("load").value;
+
+    var message =
+        document.getElementById("message").value.trim();
+
+
+    var text =
+        "🚚 *Super Carry Freight Booking Request*%0A%0A" +
+
+        "👤 Name: " +
+        encodeURIComponent(name) +
+        "%0A" +
+
+        "📞 Mobile: " +
+        encodeURIComponent(phone) +
+        "%0A" +
+
+        "📍 Pickup: " +
+        encodeURIComponent(pickup) +
+        "%0A" +
+
+        "📍 Drop: " +
+        encodeURIComponent(drop) +
+        "%0A" +
+
+        "📦 Load: " +
+        encodeURIComponent(load) +
+        "%0A" +
+
+        "📝 Goods Details: " +
+        encodeURIComponent(message);
+
+
+    window.open(
+        "https://wa.me/919670463908?text=" + text,
+        "_blank"
+    );
 
 });
 
